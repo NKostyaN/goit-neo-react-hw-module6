@@ -1,27 +1,32 @@
 import css from "./ContactList.module.css";
 import ContactListItem from "../ContactListItem/ContactListItem";
+import { useSelector } from "react-redux";
+import { selectContacts } from "../../remux/contactsSlice";
+import { selectNameFilter } from "../../remux/filtersSlice";
 
-const ContactList = ({ contacts, toDelete }) => {
-  const deleteItem = (id) => {
-    toDelete(id);
-  };
+const ContactList = () => {
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectNameFilter);
+
+  const filteredContacts = contacts.filter((item) =>
+    item.name.toLowerCase().includes(filter)
+  );
 
   return (
     <>
-      <ul className={css.contactList}>
-        {contacts.map((el) => {
-          return (
-            <li key={el.id}>
-              <ContactListItem
-                id={el.id}
-                name={el.name}
-                number={el.number}
-                idToDelete={deleteItem}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      {contacts.length === 0 ? (
+        <p>Tere is no contacts yet, try to add some</p>
+      ) : (
+        <ul className={css.contactList}>
+          {filteredContacts.map((el) => {
+            return (
+              <li key={el.id}>
+                <ContactListItem item={el} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </>
   );
 };

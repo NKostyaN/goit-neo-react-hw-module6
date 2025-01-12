@@ -1,8 +1,12 @@
 import css from "./ContactListItem.module.css";
+import { deleteContact } from "../../remux/contactsSlice";
+import { useDispatch } from "react-redux";
 
-const ContactListItem = ({ id, name, number, idToDelete }) => {
+const ContactListItem = ({ item }) => {
+  const dispatch = useDispatch();
+
   const handleClick = () => {
-    idToDelete(id);
+    dispatch(deleteContact(item.id));
   };
 
   return (
@@ -10,10 +14,10 @@ const ContactListItem = ({ id, name, number, idToDelete }) => {
       <div className={css.card}>
         <ul>
           <li>
-            <p className={css.name}>&#128100; {name}</p>
+            <p className={css.name}>&#128100; {item.name}</p>
           </li>
           <li>
-            <p className={css.number}>&#128222; {number}</p>
+            <p className={css.number}>&#128222; {item.number}</p>
           </li>
         </ul>
         <button onClick={handleClick}>Delete</button>

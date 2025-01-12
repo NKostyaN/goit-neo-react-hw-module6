@@ -1,8 +1,12 @@
 import css from "./SearchBox.module.css";
+import { useDispatch } from "react-redux";
+import { changeFilter } from "../../remux/filtersSlice";
 
-const SearchBox = ({ toSearch }) => {
+const SearchBox = () => {
+  const dispatch = useDispatch();
+
   const handleInput = ({ target: { value } }) => {
-    toSearch(value);
+    dispatch(changeFilter(value));
   };
 
   return (
