@@ -16,7 +16,7 @@ const contactSchema = Yup.object().shape({
     .required("Required field"),
 });
 
-const ContactForm = ({ toSubmit }) => {
+const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (data, actions) => {
