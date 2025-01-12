@@ -1,5 +1,5 @@
 import css from "./ContactListItem.module.css";
-import { deleteContact } from "../../remux/contactsSlice";
+import { deleteContact } from "../../redux/contactsSlice";
 import { useDispatch } from "react-redux";
 
 const ContactListItem = ({ item }) => {
